@@ -10,6 +10,9 @@ from urllib.parse import unquote as unquote_url
 import requests
 from jsonschema import Draft202012Validator, FormatChecker
 from win32api import GetFileVersionInfo, LOWORD, HIWORD
+from pathlib import Path
+import subprocess
+from filecmp import dircmp
 
 api_url = os.environ.get('APPVEYOR_API_URL')
 has_error = False
@@ -98,6 +101,43 @@ def gen_pl_table(filename):
         tab_line += TMPL_TR_E + TMPL_NEW_LINE
         tab_text += tab_line
     return tab_text
+
+
+def gup_download_check(currentdir, plugin, zip):
+
+    gupdir = 'gup'
+    pathgup = Path(os.path.join(currentdir,gupdir))
+
+    if pathgup.exists():
+        shutil.rmtree(pathgup)
+    os.mkdir(gupdir)
+
+    os.chdir("updater")
+
+    subprocess.run(['./GUP.exe', '-unzipTo', 'C:\\tmp', pathgup , f'{plugin["folder-name"]} {plugin["repository"]} {plugin["id"]}'], capture_output=True, text=True).stdout
+
+    os.chdir(pathgup)
+
+    zipdir = 'zip'
+    pathzip = Path(os.path.join(pathgup,zipdir))
+    if pathzip.exists():
+        shutil.rmtree(pathzip)
+    os.mkdir(zipdir)
+
+    zip.extractall(zipdir)
+
+
+    pathgupAndFolder = os.path.join(pathgup, plugin["folder-name"])
+
+    if Path(pathgupAndFolder).exists():
+        dcmp = dircmp(pathzip, pathgupAndFolder)
+        if len(dcmp.diff_files):
+            dcmp.report_full_closure()
+            post_error(f'{plugin["display-name"]}: Difference between download and unzipping via python and gup detected, need to be checked')
+    else:
+        post_error(f'{plugin["display-name"]}: it seems gup download failed, need to be checked')
+
+    os.chdir("..")
 
 
 def unique_json_keys_check(plugin, displaynames, foldernames, repositories):
