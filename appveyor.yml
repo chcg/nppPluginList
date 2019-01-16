@@ -7,12 +7,12 @@ environment:
   - PlatformToolset: v141_xp
     PLATFORM: x64
     PYTHONTEST: x64
-    PYTHON: "C:\\Python38"
+    PYTHON: "C:\\Python38-x64"
 
   - PlatformToolset: v141_xp
     PLATFORM: Win32
     PYTHONTEST: Win32
-    PYTHON: "C:\\Python38"
+    PYTHON: "C:\\Python38-x64"
 
   - PlatformToolset: v141_xp
     PLATFORM: x64
@@ -25,7 +25,8 @@ configuration:
     #- Debug
 
 install:
-    - SET PATH=%PYTHON%;%PATH%
+    - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+    - if not "%PYTHONTEST%"=="" python -m pip install --upgrade pip
     - if not "%PYTHONTEST%"=="" python -m pip install requests jsonschema rfc3987 pywin32
 
     - if "%platform%"=="x64" set archi=amd64
@@ -72,9 +73,11 @@ after_build:
         {
             if ($env:PLATFORM_INPUT -eq "x64") {
                 Push-AppveyorArtifact "plugin_list_x64.md" -FileName plugin_list_x64.md
+                Push-AppveyorArtifact "c:\tmp\winup.log" -FileName winup.log
             }
 
             if ($env:PLATFORM_INPUT -eq "Win32") {
                 Push-AppveyorArtifact "plugin_list_x86.md" -FileName plugin_list_x86.md
+                Push-AppveyorArtifact "c:\tmp\winup.log" -FileName winup.log
             }
         }

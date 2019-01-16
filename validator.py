@@ -7,9 +7,12 @@ import shutil
 import requests
 import zipfile
 from hashlib import sha256
-from jsonschema import Draft4Validator, FormatChecker
+from jsonschema import Draft7Validator, FormatChecker
 import win32api
 from win32api import GetFileVersionInfo, LOWORD, HIWORD
+from pathlib import Path
+import subprocess
+from filecmp import dircmp
 
 api_url = os.environ.get('APPVEYOR_API_URL')
 has_error = False
@@ -51,6 +54,13 @@ def post_error(message):
     else:
         from pprint import pprint
         pprint(message)
+
+def print_diff_files(dcmp):
+    for name in dcmp.diff_files:
+        print ("diff_file %s found in %s and %s" % (name, dcmp.left, dcmp.right) )
+    for sub_dcmp in dcmp.subdirs.values():
+        print_diff_files(sub_dcmp)
+
 
 def first_two_lines(description):
     if len(description) <= c_sum_len:
@@ -97,7 +107,7 @@ def gen_pl_table(filename):
 def parse(filename):
     try:
         schema = json.loads(open("pl.schema").read())
-        schema = Draft4Validator(schema, format_checker=FormatChecker())
+        schema = Draft7Validator(schema, format_checker=FormatChecker())
     except ValueError as e:
         post_error("pl.schema - " + str(e))
         return
@@ -149,7 +159,7 @@ def parse(filename):
         dll_name = f'{plugin["folder-name"]}.dll'.lower()
 
         # Notepad++ is not case sensitive, but extracting files from the zip is,
-        # so find the exactfile name to use
+        # so find the exact file name to use
         for file in zip.namelist():
             if dll_name == file.lower():
                 dll_name = file
@@ -175,6 +185,49 @@ def parse(filename):
         if dll_version != version:
             post_error(f'{plugin["display-name"]}: Unexpected DLL version. DLL is {dll_version} but expected {version}')
             continue
+
+        currentdir =  os.getcwd()
+        #countercheck python vs. gup download
+        gupdir = 'gup'
+        pathgup = Path(os.path.join(currentdir,gupdir))
+        print(currentdir)
+        print(pathgup)
+        if pathgup.exists():
+            shutil.rmtree(pathgup)
+        os.mkdir(gupdir)
+
+        print(os.path.exists(gupdir))
+        os.chdir("updater")
+        gupdir2 = 'C:\\projects\\npppluginlist\\gup\\'
+
+        subprocess.run(['./GUP.exe', '-unzipTo', 'C:\\unused', pathgup , f'{plugin["folder-name"]} {plugin["repository"]} {plugin["id"]}'], capture_output=True, text=True).stdout
+
+        os.chdir(pathgup)
+        for path in Path(pathgup).iterdir():
+            print(path)
+
+        zipdir = 'zip'
+        pathzip = Path(os.path.join(currentdir,zipdir))
+        if pathzip.exists():
+            shutil.rmtree(pathzip)
+        os.mkdir(zipdir)
+
+        zip.extractall(zipdir)
+
+        print(os.path.exists(zipdir))
+
+        for path in Path(zipdir).iterdir():
+            print(path)
+
+        print(pathzip)
+        pathgupAndFolder = os.path.join(pathgup, plugin["folder-name"])
+        print(pathgupAndFolder)
+
+        dcmp = dircmp(pathzip, pathgupAndFolder)
+        #dcmp.report_full_closure()
+        print_diff_files(dcmp)
+
+        os.chdir("..")
 
 
         #check uniqueness of json folder-name, display-name and repository
