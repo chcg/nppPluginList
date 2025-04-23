@@ -6,6 +6,11 @@ jobs:
   build:
 
     runs-on: windows-latest
+    
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+
     strategy:
       fail-fast: false
       matrix:
@@ -61,3 +66,8 @@ jobs:
           path: |
                 binarm64\nppPluginList.dll
                 plugin_list_arm64.md
+
+    - name: Push markdown changes on tagging
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        file_pattern: 'doc/*.md'
