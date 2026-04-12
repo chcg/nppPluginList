@@ -571,6 +571,16 @@
 			"homepage": "https://github.com/chcg/NPP_HexEdit"
 		},
 		{
+			"folder-name": "HLASMLexer",
+			"display-name": "HLASM Lexer - Column-Aware Syntax Highlighting",
+			"version": "1.0.0",
+			"id": "4bf87ca7aed8d068169d588d1ac791ee10fadef5f1f5a566915d5990440fec95",
+			"repository": "https://github.com/Zaneham/hlasm-npp/releases/download/v1.0.1/HLASMLexer_x64.zip",
+			"description": "Column-aware syntax highlighting for IBM HLASM. Understands the 80-column punch card layout — labels, operations, operands, continuation markers and sequence numbers are each highlighted by their column position, not just keywords.",
+			"author": "Zane Hambly",
+			"homepage": "https://github.com/Zaneham/hlasm-npp"
+		},
+		{
 			"folder-name": "HTMLTag",
 			"display-name": "HTML Tag",
 			"version": "1.5.6.0",
@@ -581,16 +591,6 @@
 			"description": "Provides three core functions:\r\n- HTML and XML tag jumping, like the built-in brace matching and selection\r\n of tags and/or contents.\r\n- HTML entity encoding/decoding (example: é to &eacute;)\r\n- JS character encoding/decoding (example: é to \\u00E9)",
 			"author": "Martijn Coppoolse",
 			"homepage": "https://github.com/rdipardo/nppHTMLTag"
-		},
-		{
-			"folder-name": "HLASMLexer",
-			"display-name": "HLASM Lexer - Column-Aware Syntax Highlighting",
-			"version": "1.0.0",
-			"id": "4bf87ca7aed8d068169d588d1ac791ee10fadef5f1f5a566915d5990440fec95",
-			"repository": "https://github.com/Zaneham/hlasm-npp/releases/download/v1.0.1/HLASMLexer_x64.zip",
-			"description": "Column-aware syntax highlighting for IBM HLASM. Understands the 80-column punch card layout — labels, operations, operands, continuation markers and sequence numbers are each highlighted by their column position, not just keywords.",
-			"author": "Zane Hambly",
-			"homepage": "https://github.com/Zaneham/hlasm-npp"
 		},
 		{
 			"folder-name": "HugeFiles",
@@ -985,6 +985,18 @@
 			"homepage": "https://github.com/vladk1973/npp.connections"
 		},
 		{
+			"folder-name": "NppCrossCheck",
+			"display-name": "NppCrossCheck",
+			"version": "1.1.0.0",
+			"npp-compatible-versions": "[8.4,]",
+			"old-versions-compatibility": "[,1.0.0.0][8.5,]",
+			"id": "f2c6256e468f10cd553748416c9f6bdcbaaa204a86ffac8831363b0852a3f009",
+			"repository": "https://github.com/pablo-code14/NppCrossCheck/releases/download/v1.1.0/NppCrossCheck_x64.zip",
+			"description": "Compare two lists in the current document.\r\nPlace the two lists separated by one or more blank lines and run the plugin to cross-check their contents.",
+			"author": "Pablo Lopez",
+			"homepage": "https://github.com/pablo-code14/NppCrossCheck"
+		},
+		{
 			"folder-name": "nppcrypt",
 			"display-name": "NppCrypt",
 			"version": "1.0.1.6",
@@ -1160,6 +1172,16 @@
 			"description": "Search one or more regular expression in one or more different files and get XML search results.",
 			"author": "Jan Graefe",
 			"homepage": "https://github.com/viper3400/RegExTractor/wiki/de_userdocumentation"
+		},
+		{
+			"folder-name": "NppStripIpAndHost",
+			"display-name": "NppStripIpAndHost",
+			"version": "1.0.0",
+			"id": "F3ADC88E677EDEAB64380E94F9E9B8D4EAC2C95743449514BD718CE4AF8AAE4A",
+			"repository": "https://github.com/larreblarsson/NppStripIpAndHost/releases/download/1.0.0/NppStripIpAndHost_1.0.0_x64.zip",
+			"description": "Strips out sensitive IP addresses (IPv4 & IPv6) and hostnames from text files and server logs. Features a custom replacement UI and safe per-document undo.",
+			"author": "Tomas Larsson",
+			"homepage": "https://github.com/larreblarsson/NppStripIpAndHost.git"
 		},
 		{
 			"folder-name": "NppTags",
@@ -1564,16 +1586,6 @@
 			"author": "Frank Fesevur",
 			"homepage": "https://www.fesevur.com/nppsnippets"
 		},
-        {
-            "folder-name": "NppStripIpAndHost",
-            "display-name": "NppStripIpAndHost",
-            "version": "1.0.0",
-            "id": "F3ADC88E677EDEAB64380E94F9E9B8D4EAC2C95743449514BD718CE4AF8AAE4A",
-            "repository": "https://github.com/larreblarsson/NppStripIpAndHost/releases/download/1.0.0/NppStripIpAndHost_1.0.0_x64.zip",
-            "description": "Strips out sensitive IP addresses (IPv4 & IPv6) and hostnames from text files and server logs. Features a custom replacement UI and safe per-document undo.",
-            "author": "Tomas Larsson",
-            "homepage": "https://github.com/larreblarsson/NppStripIpAndHost.git"
-        },		
 		{
 			"folder-name": "nppplugin_solutionhub",
 			"display-name": "Solution Hub",
@@ -1763,6 +1775,17 @@
 			"homepage": "https://sourceforge.net/projects/notepad-visualstudiolinecopy/"
 		},
 		{
+			"folder-name": "VSCodeKeymapNpp",
+			"display-name": "VSCode Keymap NPP",
+			"version": "0.1.0",
+			"npp-compatible-versions": "[8.8.6,]",
+			"id": "07d6750f00b57bdb83e7037913cb667f5ea8840df03726f9f1b95d1a671f1a2b",
+			"repository": "https://github.com/14ag/vscode-to-notepadpp/releases/download/v0.1.0/VSCodeKeymapNpp-0.1.0-x64.zip",
+			"description": "Brings a focused VS Code shortcut set to Notepad++ and blocks conflicting default shortcuts in strict mode.",
+			"author": "philip",
+			"homepage": "https://github.com/14ag/vscode-to-notepadpp"
+		},
+		{
 			"folder-name": "WakaTime",
 			"display-name": "WakaTime",
 			"version": "5.1.1",
@@ -1823,29 +1846,6 @@
 			"description": "Tired of zooming your document everytime you just want to scroll but accidentally still holding the [Ctrl] key? Then this is what you want! It disables mouse zoom, keyboard zoom, or both.",
 			"author": "Stanislav Eckert",
 			"homepage": "https://github.com/StanDog/npp-zoomdisabler"
-		},
-		{
-			"folder-name": "NppCrossCheck",
-			"display-name": "NppCrossCheck",
-			"version": "1.1.0.0",
-			"npp-compatible-versions": "[8.4,]",
-			"old-versions-compatibility": "[,1.0.0.0][8.5,]",
-			"id": "f2c6256e468f10cd553748416c9f6bdcbaaa204a86ffac8831363b0852a3f009",
-			"repository": "https://github.com/pablo-code14/NppCrossCheck/releases/download/v1.1.0/NppCrossCheck_x64.zip",
-			"description": "Compare two lists in the current document.\r\nPlace the two lists separated by one or more blank lines and run the plugin to cross-check their contents.",
-			"author": "Pablo Lopez",
-			"homepage": "https://github.com/pablo-code14/NppCrossCheck"
-		},
-		{
-			"folder-name": "VSCodeKeymapNpp",
-			"display-name": "VSCode Keymap NPP",
-			"version": "0.1.0",
-			"npp-compatible-versions": "[8.8.6,]",
-			"id": "07d6750f00b57bdb83e7037913cb667f5ea8840df03726f9f1b95d1a671f1a2b",
-			"repository": "https://github.com/14ag/vscode-to-notepadpp/releases/download/v0.1.0/VSCodeKeymapNpp-0.1.0-x64.zip",
-			"description": "Brings a focused VS Code shortcut set to Notepad++ and blocks conflicting default shortcuts in strict mode.",
-			"author": "philip",
-			"homepage": "https://github.com/14ag/vscode-to-notepadpp"
 		}
 	]
 }
